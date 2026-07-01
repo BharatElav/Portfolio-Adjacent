@@ -3,14 +3,14 @@ media: /images/compPicC.png
 mediaType: image
 side: left
 
-Hi, I'm Bharatraj. I’m a Computer Engineering and Applied Mathematics student at MSU, currently serving as the Low Voltage Power Lead for our Formula SAE team. My recent work includes leading the electrical architecture for a formula-style vehicle, where I manage crucial power and communication signals. Beyond the Shop, I’ve developed motor control logic using computer vision, a project that recently took runner up at spartahack 11, and I’m currently studying graduate-level optimization to apply more rigorous decision-making frameworks to complex system integrations.
+Hi! I'm Bharatraj, an Electrical and Computer Engineering student at MSU, current serving as the Embedded Software Lead for our Formula SAE team. Beyond the shop I participate in hackathons and am involved in MOO research. 
 
 ---highlight---
 media: /images/carNight.jpg
 mediaType: image
 side: right
 
-Low Voltage Power Lead at MSU Formula SAE. I lead the electrical architecture for our formula-style race car — wiring harness design, PCB development in Altium, and high-voltage system integration. My recent work includes a 33% rear harness mass reduction and custom PCB designs for brake system plausibility, analog-to-CAN conversion, and high voltage shutdown.
+Embedded Software Lead for our Formula SAE team. Currently working on redesigning all in house modules to be STM32 based from earlier teensy based modules. I previously served as the Low Voltage Power Lead where I was responsible for system integration and our motorsports wiring harness. 
 
 ---highlight---
 media: /images/spartahack.jpg
@@ -24,4 +24,4 @@ media: /images/MOO.png
 mediaType: image
 side: right
 
-Studying graduate-level multi-objective optimization, developing a custom region-based domination framework that generalizes Pareto dominance. Built on top of NSGA-II, currently reimplementing in Python using pymoo for improved flexibility and sampling control.
+Involved in Multi Objective Optimization research under Professor Kalyanmoy Deb, developing a custom region based domination framework built for any non domination algorithms. Currently reimplementing in Python using PYMOO for improved flexibility.
