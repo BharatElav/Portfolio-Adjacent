@@ -107,7 +107,7 @@ relationship: Faculty advisor for Formula SAE
 ---reference---
 name: Kalyanmoy Deb
 title: Electrical Engineer Professor · MSU
-relationship: Professor for whom I am researching under
+relationship: COIN Lab Director for whom I am researching under
 
 ---reference---
 name: Prem Chahal
