@@ -17,7 +17,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
 
       {/* Tag filter row */}
       {allTags.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2 py-3 border-b border-black/10 dark:border-white/10 mb-6 text-sm text-gray-400">
+        <div className="flex flex-wrap items-center gap-2 py-3 border-b border-black/0 dark:border-white/0 mb-6 text-sm text-gray-400">
           <button
             onClick={() => setActiveTag(null)}
             className={`transition-colors hover:text-black dark:hover:text-white ${activeTag === null ? 'text-black dark:text-white font-medium' : ''}`}
@@ -45,7 +45,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
             {pinned.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`}>
                 <motion.div
-                  className="border border-black/10 dark:border-white/10 rounded-xl p-6 cursor-pointer h-full bg-white dark:bg-black"
+                  className="border border-black/10 dark:border-white/0 rounded-xl p-6 cursor-pointer h-full bg-[var(--background)]"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.15 }}
                 >
@@ -61,14 +61,14 @@ export default function BlogList({ posts }: { posts: Post[] }) {
               </Link>
             ))}
           </div>
-          <hr className="border-black/10 dark:border-white/10 mb-6" />
+          <hr className="border-black/0 dark:border-white/0 mb-6" />
         </>
       )}
 
       {/* Regular post list */}
       <ul className="flex flex-col">
         {regular.map((post) => (
-          <li key={post.slug} className="border-b border-black/10 dark:border-white/10">
+          <li key={post.slug} className="border-b border-black/0 dark:border-white/0">
             <Link href={`/blog/${post.slug}`}>
               <motion.div
                 className="flex gap-6 py-6 cursor-pointer"

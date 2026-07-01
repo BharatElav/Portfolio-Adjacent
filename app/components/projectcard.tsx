@@ -8,7 +8,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/projects/${project.slug}`}>
       <motion.div
-        className="border border-black/10 dark:border-white/10 rounded-xl overflow-hidden cursor-pointer group bg-white dark:bg-black"
+        className="border border-black/0 dark:border-white/0 rounded-xl overflow-hidden cursor-pointer group bg-[var(--background)]"
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.15 }}
       >

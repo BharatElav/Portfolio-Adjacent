@@ -22,8 +22,8 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
             onClick={() => setActive(tag)}
             className={`text-sm px-4 py-1.5 rounded-full border transition-colors relative overflow-hidden ${
               active === tag
-                ? 'border-black dark:border-white bg-black dark:bg-white text-white dark:text-black'
-                : 'border-black dark:border-white text-black dark:text-white hover:text-white dark:hover:text-black'
+                ? 'border-black/0 dark:border-white/0 bg-black dark:bg-white text-white dark:text-black'
+                : 'border-black/0 dark:border-white/0 text-black dark:text-white hover:text-white dark:hover:text-black'
             }`}
             whileHover="hover"
           >

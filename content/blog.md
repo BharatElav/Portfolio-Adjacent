@@ -3,7 +3,7 @@ title: Why CAN bus architecture matters
 date: 2025-01-15
 readtime: 3
 slug: can-bus-architecture
-pinned: false
+pinned: true
 
 A deep dive into how CAN bus topology decisions affect reliability and debug complexity in motorsport electronics.
 

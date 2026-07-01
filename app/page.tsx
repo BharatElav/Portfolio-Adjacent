@@ -8,7 +8,7 @@ export default function Home() {
   const cv = parseCV()
 
   return (
-    <main className="h-screen overflow-y-scroll snap-y snap-mandatory [&::-webkit-scrollbar]:hidden bg-white dark:bg-black">
+    <main className="h-screen overflow-y-scroll snap-y snap-mandatory [&::-webkit-scrollbar]:hidden bg-[var(--background)]">
       {highlights.map((highlight, index) => (
         <HighlightBlock key={index} data={highlight} />
       ))}

@@ -26,7 +26,7 @@ const socials = [
 
 export default function NavBar() {
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-5 bg-white dark:bg-black border-b border-black/10 dark:border-white/10">
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-5 bg-[var(--background)] border-b border-black/0 dark:border-white/0">
             <div className="flex flex-col">
                 <Link href="/" className="text-lg font-bold text-black dark:text-white leading-tight">
                     Bharatraj Elavarasan

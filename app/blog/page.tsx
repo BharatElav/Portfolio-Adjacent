@@ -5,7 +5,7 @@ export default function BlogPage() {
     const posts = parseBlog()
 
     return (
-        <main className="min-h-screen pt-32 pb-16 [&::-webkit-scrollbar]:hidden flex flex-col items-center bg-white dark:bg-black">
+        <main className="min-h-screen pt-32 pb-16 [&::-webkit-scrollbar]:hidden flex flex-col items-center bg-[var(--background)]">
             <div className="w-full max-w-2xl px-8">
                 <h1 className="text-5xl font-bold mb-12 text-black dark:text-white">Blog</h1>
                 <BlogList posts={posts} />

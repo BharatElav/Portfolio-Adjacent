@@ -33,11 +33,11 @@ export default function CVSection({ data }: { data: CV }) {
     }
 
     return (
-        <section className="h-screen snap-start flex overflow-hidden pt-20 justify-center bg-white dark:bg-black">
+        <section className="h-screen snap-start flex overflow-hidden pt-20 justify-center bg-[var(--background)]">
             <div className="flex w-full max-w-5xl">
 
                 {/* Sidebar */}
-                <div className="w-36 shrink-0 px-4 py-12 flex flex-col gap-4 border-r border-black/10 dark:border-white/10 overflow-y-auto [&::-webkit-scrollbar]:hidden">
+                <div className="w-36 shrink-0 px-4 py-12 flex flex-col gap-4 overflow-y-auto [&::-webkit-scrollbar]:hidden">
                     {sections.map((s) => (
                         <button
                             key={s}
@@ -60,7 +60,7 @@ export default function CVSection({ data }: { data: CV }) {
                     <div
                         id="Contact"
                         ref={(el) => { sectionRefs.current['Contact'] = el }}
-                        className="border border-black/10 dark:border-white/10 rounded-xl p-8"
+                        className="border border-black/0 dark:border-white/0 rounded-xl p-8"
                     >
                         <h2 className="text-2xl font-bold mb-4 text-black dark:text-white">Contact Information</h2>
                         <div className="grid grid-cols-2 gap-y-3">
@@ -75,7 +75,7 @@ export default function CVSection({ data }: { data: CV }) {
                     <div
                         id="Experience"
                         ref={(el) => { sectionRefs.current['Experience'] = el }}
-                        className="border border-black/10 dark:border-white/10 rounded-xl p-8"
+                        className="border border-black/0 dark:border-white/0 rounded-xl p-8"
                     >
                         <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">Experience</h2>
                         <div className="flex flex-col gap-8">
@@ -103,7 +103,7 @@ export default function CVSection({ data }: { data: CV }) {
                     <div
                         id="Education"
                         ref={(el) => { sectionRefs.current['Education'] = el }}
-                        className="border border-black/10 dark:border-white/10 rounded-xl p-8"
+                        className="border border-black/0 dark:border-white/0 rounded-xl p-8"
                     >
                         <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">Education</h2>
                         <div className="flex flex-col gap-8">
@@ -129,12 +129,12 @@ export default function CVSection({ data }: { data: CV }) {
                     <div
                         id="Skills"
                         ref={(el) => { sectionRefs.current['Skills'] = el }}
-                        className="border border-black/10 dark:border-white/10 rounded-xl p-8"
+                        className="border border-black/0 dark:border-white/0 rounded-xl p-8"
                     >
                         <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">Skills</h2>
                         <div className="flex flex-wrap gap-2">
                             {data.skills.map((skill, i) => (
-                                <span key={i} className="text-sm border border-black dark:border-white text-black dark:text-white px-3 py-1 rounded-full">
+                                <span key={i} className="text-sm border border-black/0 dark:border-white/0 text-black dark:text-white px-3 py-1 rounded-full">
                                     {skill}
                                 </span>
                             ))}
@@ -145,7 +145,7 @@ export default function CVSection({ data }: { data: CV }) {
                     <div
                         id="References"
                         ref={(el) => { sectionRefs.current['References'] = el }}
-                        className="border border-black/10 dark:border-white/10 rounded-xl p-8"
+                        className="border border-black/0 dark:border-white/0 rounded-xl p-8"
                     >
                         <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">References</h2>
                         <div className="flex flex-col gap-6">
