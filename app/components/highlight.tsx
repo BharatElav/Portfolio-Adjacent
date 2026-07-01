@@ -11,7 +11,7 @@ export default function HighlightBlock({ data }: { data: Highlight }) {
   return (
     <section
       ref={ref}
-      className={`flex items-center gap-8 h-screen px-16 pt-20 snap-start ${
+      className={`flex items-center gap-8 h-screen px-16 pt-20 snap-start snap-always ${
         data.side === 'left' ? 'flex-row-reverse' : 'flex-row'
       }`}
     >

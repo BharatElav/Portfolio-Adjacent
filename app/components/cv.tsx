@@ -33,7 +33,7 @@ export default function CVSection({ data }: { data: CV }) {
     }
 
     return (
-        <section className="h-screen snap-start flex overflow-hidden pt-20 justify-center bg-[var(--background)]">
+        <section className="h-screen snap-start snap-always flex overflow-hidden pt-20 justify-center bg-[var(--background)]">
             <div className="flex w-full max-w-5xl">
                 <div className="w-36 shrink-0 px-4 py-12 flex flex-col gap-4 overflow-y-auto [&::-webkit-scrollbar]:hidden">
                     {sections.map((s) => (
