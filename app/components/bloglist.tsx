@@ -17,19 +17,19 @@ export default function BlogList({ posts }: { posts: Post[] }) {
 
       {/* Tag filter row */}
       {allTags.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2 py-3 border-b border-black/10 mb-6 text-sm text-gray-400">
+        <div className="flex flex-wrap items-center gap-2 py-3 border-b border-black/10 dark:border-white/10 mb-6 text-sm text-gray-400">
           <button
             onClick={() => setActiveTag(null)}
-            className={`transition-colors hover:text-black ${activeTag === null ? 'text-black font-medium' : ''}`}
+            className={`transition-colors hover:text-black dark:hover:text-white ${activeTag === null ? 'text-black dark:text-white font-medium' : ''}`}
           >
             all
           </button>
           {allTags.map((tag) => (
             <span key={tag} className="flex items-center gap-2">
-              <span className="text-black/20">•</span>
+              <span className="text-black/20 dark:text-white/20">•</span>
               <button
                 onClick={() => setActiveTag(tag)}
-                className={`transition-colors hover:text-black ${activeTag === tag ? 'text-black font-medium' : ''}`}
+                className={`transition-colors hover:text-black dark:hover:text-white ${activeTag === tag ? 'text-black dark:text-white font-medium' : ''}`}
               >
                 #{tag}
               </button>
@@ -45,30 +45,30 @@ export default function BlogList({ posts }: { posts: Post[] }) {
             {pinned.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`}>
                 <motion.div
-                  className="border border-black/10 rounded-xl p-6 cursor-pointer h-full"
+                  className="border border-black/10 dark:border-white/10 rounded-xl p-6 cursor-pointer h-full bg-white dark:bg-black"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.15 }}
                 >
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-bold text-xl lowercase">{post.title}</h3>
-                    <span className="text-xs text-gray-400 ml-2 border border-gray-200 px-1.5 py-0.5 rounded">pinned</span>
+                    <h3 className="font-bold text-xl lowercase text-black dark:text-white">{post.title}</h3>
+                    <span className="text-xs text-gray-400 ml-2 border border-gray-200 dark:border-white/20 px-1.5 py-0.5 rounded">pinned</span>
                   </div>
-                  <p className="text-gray-500 text-sm mb-4">{post.description}</p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">{post.description}</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500">
                     {post.readtime} min read &nbsp;·&nbsp; {new Date(post.date).getFullYear()}
                   </p>
                 </motion.div>
               </Link>
             ))}
           </div>
-          <hr className="border-black/10 mb-6" />
+          <hr className="border-black/10 dark:border-white/10 mb-6" />
         </>
       )}
 
       {/* Regular post list */}
       <ul className="flex flex-col">
         {regular.map((post) => (
-          <li key={post.slug} className="border-b border-black/10">
+          <li key={post.slug} className="border-b border-black/10 dark:border-white/10">
             <Link href={`/blog/${post.slug}`}>
               <motion.div
                 className="flex gap-6 py-6 cursor-pointer"
@@ -76,19 +76,19 @@ export default function BlogList({ posts }: { posts: Post[] }) {
                 transition={{ duration: 0.15 }}
               >
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-1">{post.title}</h3>
-                  <p className="text-gray-500 text-sm mb-2">{post.description}</p>
-                  <p className="text-sm text-gray-400">
+                  <h3 className="text-xl font-semibold mb-1 text-black dark:text-white">{post.title}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">{post.description}</p>
+                  <p className="text-sm text-gray-400 dark:text-gray-500">
                     {post.readtime} min read &nbsp;·&nbsp;
                     {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' })}
                   </p>
-                  <p className="text-sm text-gray-400 mt-1 flex flex-wrap gap-2">
+                  <p className="text-sm text-gray-400 dark:text-gray-500 mt-1 flex flex-wrap gap-2">
                     <span>{new Date(post.date).getFullYear()}</span>
                     {post.tags?.map(tag => (
                       <button
                         key={tag}
                         onClick={(e) => { e.preventDefault(); setActiveTag(tag) }}
-                        className="hover:text-black transition-colors"
+                        className="hover:text-black dark:hover:text-white transition-colors"
                       >
                         #{tag}
                       </button>

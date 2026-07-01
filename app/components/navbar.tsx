@@ -26,22 +26,22 @@ const socials = [
 
 export default function NavBar() {
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-5 bg-white border-b border-black/10">
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-5 bg-white dark:bg-black border-b border-black/10 dark:border-white/10">
             <div className="flex flex-col">
-                <Link href="/" className="text-lg font-bold text-black leading-tight">
+                <Link href="/" className="text-lg font-bold text-black dark:text-white leading-tight">
                     Bharatraj Elavarasan
                 </Link>
-                <span className="text-xs text-black/50 tracking-wide">Electrical & Computer Engineering @ MSU</span>
+                <span className="text-xs text-black/50 dark:text-white/50 tracking-wide">Electrical & Computer Engineering @ MSU</span>
             </div>
 
             <div className="flex items-center gap-8">
                 <motion.a
                     href="mailto:elavara1@msu.edu"
-                    className="text-sm text-black relative overflow-hidden px-3 py-1 rounded-md hover:text-white transition-colors"
+                    className="text-sm text-black dark:text-white relative overflow-hidden px-3 py-1 rounded-md hover:text-white dark:hover:text-black transition-colors"
                     whileHover="hover"
                 >
                     <motion.span
-                        className="absolute inset-0 rounded-md bg-black"
+                        className="absolute inset-0 rounded-md bg-black dark:bg-white"
                         initial={{ scale: 0 }}
                         variants={{ hover: { scale: 1, opacity: 1 } }}
                         transition={{ duration: 0.15, ease: 'easeInOut' }}
@@ -57,11 +57,11 @@ export default function NavBar() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={s.label}
-                            className="w-9 h-9 rounded-full border border-black flex items-center justify-center text-black relative overflow-hidden transition-colors hover:text-white"
+                            className="w-9 h-9 rounded-full border border-black dark:border-white flex items-center justify-center text-black dark:text-white relative overflow-hidden transition-colors hover:text-white dark:hover:text-black"
                             whileHover="hover"
                         >
                             <motion.span
-                                className="absolute inset-0 rounded-full bg-black"
+                                className="absolute inset-0 rounded-full bg-black dark:bg-white"
                                 initial={{ scale: 0 }}
                                 variants={{ hover: { scale: 1, opacity: 1 } }}
                                 transition={{ duration: 0.15, ease: 'easeInOut' }}
@@ -76,24 +76,24 @@ export default function NavBar() {
                 <div className="flex items-center gap-4">
                     <motion.div className="relative overflow-hidden rounded-md" whileHover="hover">
                         <motion.span
-                            className="absolute inset-0 rounded-md bg-black"
+                            className="absolute inset-0 rounded-md bg-black dark:bg-white"
                             initial={{ scale: 0 }}
                             variants={{ hover: { scale: 1, opacity: 1 } }}
                             transition={{ duration: 0.15, ease: 'easeInOut' }}
                         />
-                        <Link href="/projects" className="relative z-10 text-sm text-black hover:text-white px-3 py-1 block transition-colors">
+                        <Link href="/projects" className="relative z-10 text-sm text-black dark:text-white hover:text-white dark:hover:text-black px-3 py-1 block transition-colors">
                             Projects
                         </Link>
                     </motion.div>
 
                     <motion.div className="relative overflow-hidden rounded-md" whileHover="hover">
                         <motion.span
-                            className="absolute inset-0 rounded-md bg-black"
+                            className="absolute inset-0 rounded-md bg-black dark:bg-white"
                             initial={{ scale: 0 }}
                             variants={{ hover: { scale: 1, opacity: 1 } }}
                             transition={{ duration: 0.15, ease: 'easeInOut' }}
                         />
-                        <Link href="/blog" className="relative z-10 text-sm text-black hover:text-white px-3 py-1 block transition-colors">
+                        <Link href="/blog" className="relative z-10 text-sm text-black dark:text-white hover:text-white dark:hover:text-black px-3 py-1 block transition-colors">
                             Blog
                         </Link>
                     </motion.div>

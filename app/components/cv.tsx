@@ -33,17 +33,20 @@ export default function CVSection({ data }: { data: CV }) {
     }
 
     return (
-        <section className="h-screen snap-start flex overflow-hidden pt-20 justify-center">
+        <section className="h-screen snap-start flex overflow-hidden pt-20 justify-center bg-white dark:bg-black">
             <div className="flex w-full max-w-5xl">
 
                 {/* Sidebar */}
-                <div className="w-36 shrink-0 px-4 py-12 flex flex-col gap-4 border-r border-black/10 overflow-y-auto [&::-webkit-scrollbar]:hidden">
+                <div className="w-36 shrink-0 px-4 py-12 flex flex-col gap-4 border-r border-black/10 dark:border-white/10 overflow-y-auto [&::-webkit-scrollbar]:hidden">
                     {sections.map((s) => (
                         <button
                             key={s}
                             onClick={() => scrollTo(s)}
-                            className={`text-left text-sm transition-colors ${active === s ? 'text-black font-bold border-l-2 border-black pl-2' : 'text-gray-400 hover:text-black pl-2'
-                                }`}
+                            className={`text-left text-sm transition-colors ${
+                                active === s
+                                    ? 'text-black dark:text-white font-bold border-l-2 border-black dark:border-white pl-2'
+                                    : 'text-gray-400 hover:text-black dark:hover:text-white pl-2'
+                            }`}
                         >
                             {s}
                         </button>
@@ -57,14 +60,14 @@ export default function CVSection({ data }: { data: CV }) {
                     <div
                         id="Contact"
                         ref={(el) => { sectionRefs.current['Contact'] = el }}
-                        className="border border-black/10 rounded-xl p-8"
+                        className="border border-black/10 dark:border-white/10 rounded-xl p-8"
                     >
-                        <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
+                        <h2 className="text-2xl font-bold mb-4 text-black dark:text-white">Contact Information</h2>
                         <div className="grid grid-cols-2 gap-y-3">
-                            <span className="font-semibold">Name</span>
-                            <span>{data.contact.name}</span>
-                            <span className="font-semibold">Email</span>
-                            <a href={`mailto:${data.contact.email}`} className="hover:underline">{data.contact.email}</a>
+                            <span className="font-semibold text-black dark:text-white">Name</span>
+                            <span className="text-black dark:text-white">{data.contact.name}</span>
+                            <span className="font-semibold text-black dark:text-white">Email</span>
+                            <a href={`mailto:${data.contact.email}`} className="hover:underline text-black dark:text-white">{data.contact.email}</a>
                         </div>
                     </div>
 
@@ -72,24 +75,24 @@ export default function CVSection({ data }: { data: CV }) {
                     <div
                         id="Experience"
                         ref={(el) => { sectionRefs.current['Experience'] = el }}
-                        className="border border-black/10 rounded-xl p-8"
+                        className="border border-black/10 dark:border-white/10 rounded-xl p-8"
                     >
-                        <h2 className="text-2xl font-bold mb-6">Experience</h2>
+                        <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">Experience</h2>
                         <div className="flex flex-col gap-8">
                             {data.experience.map((exp, i) => (
                                 <div key={i} className="flex gap-8">
                                     <div className="w-36 shrink-0 text-right">
-                                        <span className="inline-block bg-black text-white text-xs px-2 py-1 rounded">
+                                        <span className="inline-block bg-black dark:bg-white text-white dark:text-black text-xs px-2 py-1 rounded">
                                             {exp.start} — {exp.end}
                                         </span>
-                                        <p className="text-xs text-gray-500 mt-1">{exp.location}</p>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{exp.location}</p>
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-base leading-tight">{exp.title}</h3>
-                                        <a href={exp.link} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-black transition-colors">
+                                        <h3 className="font-bold text-base leading-tight text-black dark:text-white">{exp.title}</h3>
+                                        <a href={exp.link} target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
                                             {exp.company}
                                         </a>
-                                        <p className="text-sm text-gray-600 mt-2 leading-relaxed">{exp.description}</p>
+                                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">{exp.description}</p>
                                     </div>
                                 </div>
                             ))}
@@ -100,22 +103,22 @@ export default function CVSection({ data }: { data: CV }) {
                     <div
                         id="Education"
                         ref={(el) => { sectionRefs.current['Education'] = el }}
-                        className="border border-black/10 rounded-xl p-8"
+                        className="border border-black/10 dark:border-white/10 rounded-xl p-8"
                     >
-                        <h2 className="text-2xl font-bold mb-6">Education</h2>
+                        <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">Education</h2>
                         <div className="flex flex-col gap-8">
                             {data.education.map((edu, i) => (
                                 <div key={i} className="flex gap-8">
                                     <div className="w-36 shrink-0 text-right">
-                                        <span className="inline-block bg-black text-white text-xs px-2 py-1 rounded">
+                                        <span className="inline-block bg-black dark:bg-white text-white dark:text-black text-xs px-2 py-1 rounded">
                                             {edu.start} — {edu.end}
                                         </span>
-                                        <p className="text-xs text-gray-500 mt-1">GPA: {edu.gpa}</p>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">GPA: {edu.gpa}</p>
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-base leading-tight">{edu.institution}</h3>
-                                        <p className="text-sm text-gray-500">{edu.degree}</p>
-                                        <p className="text-sm text-gray-600 mt-2 leading-relaxed">{edu.description}</p>
+                                        <h3 className="font-bold text-base leading-tight text-black dark:text-white">{edu.institution}</h3>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">{edu.degree}</p>
+                                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">{edu.description}</p>
                                     </div>
                                 </div>
                             ))}
@@ -126,12 +129,12 @@ export default function CVSection({ data }: { data: CV }) {
                     <div
                         id="Skills"
                         ref={(el) => { sectionRefs.current['Skills'] = el }}
-                        className="border border-black/10 rounded-xl p-8"
+                        className="border border-black/10 dark:border-white/10 rounded-xl p-8"
                     >
-                        <h2 className="text-2xl font-bold mb-6">Skills</h2>
+                        <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">Skills</h2>
                         <div className="flex flex-wrap gap-2">
                             {data.skills.map((skill, i) => (
-                                <span key={i} className="text-sm border border-black px-3 py-1 rounded-full">
+                                <span key={i} className="text-sm border border-black dark:border-white text-black dark:text-white px-3 py-1 rounded-full">
                                     {skill}
                                 </span>
                             ))}
@@ -142,15 +145,15 @@ export default function CVSection({ data }: { data: CV }) {
                     <div
                         id="References"
                         ref={(el) => { sectionRefs.current['References'] = el }}
-                        className="border border-black/10 rounded-xl p-8"
+                        className="border border-black/10 dark:border-white/10 rounded-xl p-8"
                     >
-                        <h2 className="text-2xl font-bold mb-6">References</h2>
+                        <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">References</h2>
                         <div className="flex flex-col gap-6">
                             {data.references.map((ref, i) => (
                                 <div key={i}>
-                                    <p className="font-bold">{ref.name}</p>
-                                    <p className="text-sm text-gray-500">{ref.title}</p>
-                                    <p className="text-sm text-gray-600 mt-1">{ref.relationship}</p>
+                                    <p className="font-bold text-black dark:text-white">{ref.name}</p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">{ref.title}</p>
+                                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{ref.relationship}</p>
                                 </div>
                             ))}
                         </div>

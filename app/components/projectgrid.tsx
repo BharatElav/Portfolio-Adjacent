@@ -20,13 +20,16 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
           <motion.button
             key={tag}
             onClick={() => setActive(tag)}
-            className={`text-sm px-4 py-1.5 rounded-full border transition-colors relative overflow-hidden ${active === tag ? 'border-black bg-black text-white' : 'border-black text-black hover:text-white'
-              }`}
+            className={`text-sm px-4 py-1.5 rounded-full border transition-colors relative overflow-hidden ${
+              active === tag
+                ? 'border-black dark:border-white bg-black dark:bg-white text-white dark:text-black'
+                : 'border-black dark:border-white text-black dark:text-white hover:text-white dark:hover:text-black'
+            }`}
             whileHover="hover"
           >
             {active !== tag && (
               <motion.span
-                className="absolute inset-0 rounded-full bg-black"
+                className="absolute inset-0 rounded-full bg-black dark:bg-white"
                 initial={{ scale: 0, opacity: 0 }}
                 variants={{ hover: { scale: 1, opacity: 1 } }}
                 transition={{ duration: 0.15, ease: 'easeInOut' }}
