@@ -11,7 +11,7 @@ export default function HighlightBlock({ data }: { data: Highlight }) {
       }`}
     >
       <motion.div
-        className="w-full sm:w-1/2 max-h-[45vh] sm:max-h-none"
+        className="w-full sm:w-1/2 flex justify-center"
         initial={{ opacity: 0, x: data.side === 'left' ? -60 : 60 }}
         whileInView={{
           opacity: 1,
@@ -28,10 +28,10 @@ export default function HighlightBlock({ data }: { data: Highlight }) {
             loop
             muted
             playsInline
-            className="w-full max-h-[45vh] sm:max-h-none object-cover rounded-lg"
+            className="max-h-[45vh] max-w-full w-auto object-contain rounded-lg"
           />
         ) : (
-          <img src={data.media} alt="" className="w-full max-h-[45vh] sm:max-h-none object-cover rounded-lg" />
+          <img src={data.media} alt="" className="max-h-[45vh] max-w-full w-auto object-contain rounded-lg" />
         )}
       </motion.div>
 
