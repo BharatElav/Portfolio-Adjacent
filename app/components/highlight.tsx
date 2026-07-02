@@ -28,10 +28,10 @@ export default function HighlightBlock({ data }: { data: Highlight }) {
             loop
             muted
             playsInline
-            className="max-h-[45vh] max-w-full w-auto object-contain rounded-lg"
+            className="max-h-[45vh] sm:max-h-[70vh] max-w-full w-auto object-contain rounded-lg"
           />
         ) : (
-          <img src={data.media} alt="" className="max-h-[45vh] max-w-full w-auto object-contain rounded-lg" />
+          <img src={data.media} alt="" className="max-h-[45vh] sm:max-h-[70vh] max-w-full w-auto object-contain rounded-lg" />
         )}
       </motion.div>
 
