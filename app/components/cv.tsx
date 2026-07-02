@@ -1,11 +1,69 @@
 'use client'
 
 import { CV } from '@/lib/parseCV'
+import { Course } from '@/lib/parseCourses'
 import { useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const sections = ['Contact', 'Experience', 'Education', 'Skills', 'References']
 
-export default function CVSection({ data }: { data: CV }) {
+function CourseCategoryBlock({
+    name,
+    description,
+    courses,
+}: {
+    name: string
+    description: string
+    courses: Course[]
+}) {
+    const [open, setOpen] = useState(false)
+
+    return (
+        <motion.div
+            className="border border-transparent rounded-lg overflow-hidden"
+            whileHover={{ scale: 1.01 }}
+            transition={{ duration: 0.15 }}
+        >
+            <button
+                onClick={() => setOpen(!open)}
+                className="w-full text-left px-4 py-3 flex items-center justify-between"
+            >
+                <div>
+                    <p className="text-sm font-semibold text-black dark:text-white">{name}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{description}</p>
+                </div>
+                <span className="text-xs text-gray-400 ml-4 shrink-0">{open ? '−' : '+'}</span>
+            </button>
+
+            <AnimatePresence initial={false}>
+                {open && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2, ease: 'easeInOut' }}
+                        className="overflow-hidden"
+                    >
+                        <div className="px-4 pb-4 flex flex-col gap-4">
+                            {courses.map((course) => (
+                                <div key={course.name}>
+                                    <p className="text-sm font-medium text-black dark:text-white">{course.name}</p>
+                                    {course.description && (
+                                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
+                                            {course.description}
+                                        </p>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
+    )
+}
+
+export default function CVSection({ data, courses }: { data: CV; courses: Course[] }) {
     const [active, setActive] = useState('Contact')
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
     const containerRef = useRef<HTMLDivElement | null>(null)
@@ -127,17 +185,15 @@ export default function CVSection({ data }: { data: CV }) {
                                                         {prog.description}
                                                     </p>
                                                 )}
-                                                {prog.courses && prog.courses.length > 0 && (
-                                                    <div className="mt-4 flex flex-col gap-4">
-                                                        {prog.courses.map((course, k) => (
-                                                            <div key={k}>
-                                                                <p className="text-sm font-medium text-black dark:text-white">{course.name}</p>
-                                                                {course.description && (
-                                                                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
-                                                                        {course.description}
-                                                                    </p>
-                                                                )}
-                                                            </div>
+                                                {prog.courseCategories && prog.courseCategories.length > 0 && (
+                                                    <div className="mt-4 flex flex-col gap-2">
+                                                        {prog.courseCategories.map((cat) => (
+                                                            <CourseCategoryBlock
+                                                                key={cat.name}
+                                                                name={cat.name}
+                                                                description={cat.description}
+                                                                courses={courses.filter((c) => c.category === cat.name)}
+                                                            />
                                                         ))}
                                                     </div>
                                                 )}
@@ -153,7 +209,7 @@ export default function CVSection({ data }: { data: CV }) {
                         <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">Skills</h2>
                         <div className="flex flex-wrap gap-2">
                             {data.skills.map((skill, i) => (
-                                <span key={i} className="text-sm border border-black/20 dark:border-white/20 text-black dark:text-white px-3 py-1 rounded-full">
+                                <span key={i} className="text-sm border border-transparent text-black dark:text-white px-3 py-1 rounded-full">
                                     {skill}
                                 </span>
                             ))}

@@ -96,68 +96,26 @@ gpa: 4.0
 
 Dual degree in electrical and computer engineering.
 
-course: ECE 846 — Multi-Criterion Optimization
-Classical optimization. Evolutionary optimization. Multi criterion decision making. Advanced topics in research & industry. Did a term project on generalized domination.
+category: Evolutionary Computing and Algorithms
+description: Genetic programming and evolutionary algorithms, with a focus on scalability, sustained innovation, and avoiding premature convergence.
 
-course: ECE 848 — Evolutionary Computation
-currently taking.
+category: Digital Systems & Embedded
+description: Hardware and low-level software for microprocessors, digital logic, and embedded control.
 
-course: ECE 491 - Special Topics (Machine Learning Accelerator Architectures)
-currently taking.
+category: Circuits & Electronics
+description: Analysis and design of analog and digital circuits, from transistor-level devices to full amplifier systems.
 
-course: MTH 314 — Matrix Algebra with Computational Applications
-SVD. QR factorization. Eigenspaces. Gram Schmidt. Markov chains. Done using numpy.
+category: Controls & Signal Processing
+description: Modeling and shaping the behavior of dynamic systems and the signals that drive them.
 
-course: ECE 331 — Microprocessors and Digital Systems
-Microprocessor architecture. Addressing modes. Assembly language programming. Interfacing to memory. Interrupts. Direct memory access. Communication protocols. Embedded C programming lab.
+category: Electromagnetics
+description: Field-theoretic foundations of wave propagation and electromagnetic phenomena.
 
-course: ECE 313 — Control Systems
-Analysis and design of control systems using transfer functions and state variable methods. Design of digital controllers.
+category: Applied Math for Data & Systems
+description: Linear algebra and analytical methods applied to large-scale engineering and data problems.
 
-course: CSE 331 — Algorithms and Data Structures
-Linear data structures, trees, graphs and algorithms which operate on them. Fundamental algorithms for searching, sorting, string matching, graph problems. Design and analysis of algorithms.
-
-course: ECE 366 — Signal Proccessing
-currently taking.
-
-course: ECE 302 — Electronic Circuits
-Volt-ampere characteristics of diodes and transistors. SPICE modeling. Differential, multistage and integrated circuit amplifiers. High frequency effects.
-
-course: ECE 303 — Electronic Circuits Laboratory
-Electronic test equipment and measurement fundamentals. Circuit design using diodes, transistors, integrated circuits, and sensors.
-
-course: ECE 305 — Electromagnetic Fields and Waves I
-currently taking.
-
-course: ECE 230 — Digital Logic Fundamentals
-Switching algebra, combinational logic, minimization. Programmable logic devices. Sequential system fundamentals, elements, circuits. Arithmetic operations and circuits. Memory elements and systems. Hierarchical structures. Design problems.
-
-course: CSE 232 — Introduction to Programming II
-Continuation of object-centered design and implementation in C++. Building programs from modules. Data abstraction and classes to implement abstract data types. Static and dynamic memory allocation. Data structure implementation and algorithm efficiency. Lists, tables, stacks, and queues. Templates and generic programming.
-
-course: CSE 260 — Discrete Structures
-Propositional and first order logic. Equivalence and methods of proof. Basics of counting. Set operations, relations, functions. Grammars and finite state automata. Discrete probability. Applications to computer science and engineering.
-
-course: ECE 202 — Circuits and Systems II
-Sinusoidal steady-state response. Laplace transforms. S-Domain circuit analysis. Frequency response. Fourier series. Mutual inductance. Power in sinusoidal steady state.
-
-course: ECE 203 — Circuits Lab
-Electrical test equipment and measurement fundamentals. Circuit and filter design using integrated circuit amplifiers.
-
-course: ECE 201 — Circuits and Systems II
-Resistive circuits. Loop and modal analysis. Network theorems, dependent sources. Capacitor and inductor circuits. Transient analysis. Introduction to computer-aided design.
-
-course: ECE 280 — Electrical Engineering Analysis
-Application of linear algebra, vectors, probability, and random processes to elementary problems in electrical and computer engineering. Application to signals, systems, noise, electromagnetics, and reliability. Modeling using standard software packages.
-
-
-
-
-
-
-
-
-
+category: Software Design, Data Structures & Discrete Math
+description: Theoretical and structural foundations of programming, algorithms, and formal reasoning.
 
 ---skills---
 PCB Design, Schematic Design, Wiring Harness, MATLAB, Python, C++, C, Python, RapidHarness, Teensy, STM32

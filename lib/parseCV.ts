@@ -20,7 +20,7 @@ export type CVExperience = {
   roles: CVRole[]
 }
 
-export type CVCourse = {
+export type CourseCategory = {
   name: string
   description: string
 }
@@ -31,7 +31,7 @@ export type CVProgram = {
   end: string
   gpa: string
   description: string
-  courses: CVCourse[]
+  courseCategories: CourseCategory[]
 }
 
 export type CVEducation = {
@@ -118,22 +118,46 @@ export function parseCV(): CV {
     }
 
     if (type === 'education') {
-      const programBlocks = content.split(/(?=^degree:)/m).filter(Boolean)
-      const hasHeader = !programBlocks[0].trim().startsWith('degree:')
-      const instHeader = hasHeader ? programBlocks.shift()! : ''
+      // Split off degree: blocks first, and separately pull out category: blocks
+      // (category blocks live alongside degree blocks in the same section)
+      const chunks = content.split(/(?=^degree:|^category:)/m).filter(Boolean)
+
+      const instHeaderLines: string[] = []
+      const degreeChunks: string[] = []
+      const categoryChunks: string[] = []
+
+      chunks.forEach((chunk: string) => {
+        const trimmed = chunk.trim()
+        if (trimmed.startsWith('degree:')) {
+          degreeChunks.push(chunk)
+        } else if (trimmed.startsWith('category:')) {
+          categoryChunks.push(chunk)
+        } else {
+          instHeaderLines.push(chunk)
+        }
+      })
 
       const instMeta: Record<string, string> = {}
-      instHeader.split('\n').forEach((line: string) => {
+      instHeaderLines.join('\n').split('\n').forEach((line: string) => {
         const [key, ...rest] = line.split(':')
         if (key && rest.length) instMeta[key.trim()] = rest.join(':').trim()
       })
 
-      const programs: CVProgram[] = programBlocks.map((programBlock: string) => {
-        // Split this program block further into: header fields+description, then course: sub-blocks
-        const courseBlocks = programBlock.split(/(?=^course:)/m).filter(Boolean)
-        const programHeader = courseBlocks[0].trim().startsWith('course:') ? '' : courseBlocks.shift()!
+      const courseCategories: CourseCategory[] = categoryChunks.map((block: string) => {
+        const lines = block.split('\n')
+        const meta: Record<string, string> = {}
+        lines.forEach((line: string) => {
+          const [key, ...rest] = line.split(':')
+          if (key && rest.length) meta[key.trim()] = rest.join(':').trim()
+        })
+        return {
+          name: meta.category,
+          description: meta.description ?? '',
+        }
+      })
 
-        const lines = programHeader.split('\n')
+      const programs: CVProgram[] = degreeChunks.map((block: string) => {
+        const lines = block.split('\n')
         const meta: Record<string, string> = {}
         let contentStart = 0
 
@@ -149,25 +173,13 @@ export function parseCV(): CV {
 
         const description = lines.slice(contentStart).join('\n').trim()
 
-        const courses: CVCourse[] = courseBlocks.map((cBlock: string) => {
-          const cLines = cBlock.split('\n')
-          const firstLine = cLines[0].trim()
-          const name = firstLine.replace(/^course:\s*/, '').trim()
-          const courseDescription = cLines.slice(1).join('\n').trim()
-
-          return {
-            name,
-            description: courseDescription,
-          }
-        })
-
         return {
           degree: meta.degree,
           start: meta.start,
           end: meta.end,
           gpa: meta.gpa,
           description,
-          courses,
+          courseCategories,
         }
       })
 
