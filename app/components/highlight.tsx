@@ -13,9 +13,13 @@ export default function HighlightBlock({ data }: { data: Highlight }) {
       <motion.div
         className="w-1/2"
         initial={{ opacity: 0, x: data.side === 'left' ? -60 : 60 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        whileInView={{
+          opacity: 1,
+          x: 0,
+          transition: { duration: 0.5, ease: 'easeOut' },
+        }}
         viewport={{ once: false, amount: 0.5 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         {data.mediaType === 'video' ? (
           <video
@@ -34,9 +38,13 @@ export default function HighlightBlock({ data }: { data: Highlight }) {
       <motion.div
         className="w-1/2"
         initial={{ opacity: 0, x: data.side === 'left' ? 60 : -60 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        whileInView={{
+          opacity: 1,
+          x: 0,
+          transition: { duration: 0.5, ease: 'easeOut', delay: 0.5 },
+        }}
         viewport={{ once: false, amount: 0.5 }}
-        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.5 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <p className="text-lg">{data.content}</p>
       </motion.div>
