@@ -107,6 +107,10 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
             })
 
             setActive(closest)
+
+            // Only let scroll chain up to the page (to go back to the previous
+            // section) when already at the very top of the CV content — never downward.
+            container.style.overscrollBehaviorY = container.scrollTop <= 0 ? 'auto' : 'contain'
         }
 
         container.addEventListener('scroll', handleScroll)
@@ -128,7 +132,7 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
     }
 
     return (
-        <section className={`h-screen snap-start snap-always flex overflow-hidden overscroll-contain pt-20 justify-center bg-[var(--background)] ${stacked ? 'flex-col' : 'flex-row'}`}>
+        <section className={`h-screen snap-start snap-always flex overflow-hidden pt-20 justify-center bg-[var(--background)] ${stacked ? 'flex-col' : 'flex-row'}`}>
             <div ref={wrapRef} className={`flex w-full max-w-5xl h-full ${stacked ? 'flex-col' : 'flex-row'}`}>
                 <div ref={tabBarRef} className={`shrink-0 px-4 gap-4 overscroll-contain [&::-webkit-scrollbar]:hidden flex ${stacked ? 'w-full flex-row py-4 overflow-x-auto overflow-y-hidden' : 'w-36 flex-col py-12 overflow-y-auto overflow-x-hidden'}`}>
                     {sections.map((s) => (
@@ -146,7 +150,7 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
                     ))}
                 </div>
 
-                <div ref={containerRef} className={`flex-1 overflow-y-auto overflow-x-hidden overscroll-contain flex flex-col gap-6 [&::-webkit-scrollbar]:hidden ${stacked ? 'px-4 py-8' : 'px-10 py-12'}`}>
+                <div ref={containerRef} className={`flex-1 overflow-y-auto overflow-x-hidden flex flex-col gap-6 [&::-webkit-scrollbar]:hidden ${stacked ? 'px-4 py-8' : 'px-10 py-12'}`}>
                     <div id="Contact" ref={(el) => { sectionRefs.current['Contact'] = el }} className="rounded-xl p-4 md:p-8">
                         <h2 className="text-xl md:text-2xl font-bold mb-4 text-black dark:text-white">Contact Information</h2>
                         <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-3 text-sm md:text-base">
