@@ -1,16 +1,11 @@
 'use client'
 
 import { Highlight } from '@/lib/parseHome'
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
 
 export default function HighlightBlock({ data }: { data: Highlight }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: false, amount: 0.5 })
-
   return (
     <section
-      ref={ref}
       className={`flex items-center gap-8 h-screen px-16 pt-20 snap-start snap-always ${
         data.side === 'left' ? 'flex-row-reverse' : 'flex-row'
       }`}
@@ -18,7 +13,8 @@ export default function HighlightBlock({ data }: { data: Highlight }) {
       <motion.div
         className="w-1/2"
         initial={{ opacity: 0, x: data.side === 'left' ? -60 : 60 }}
-        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         {data.mediaType === 'video' ? (
@@ -38,7 +34,8 @@ export default function HighlightBlock({ data }: { data: Highlight }) {
       <motion.div
         className="w-1/2"
         initial={{ opacity: 0, x: data.side === 'left' ? 60 : -60 }}
-        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
         transition={{ duration: 0.5, ease: 'easeOut', delay: 0.5 }}
       >
         <p className="text-lg">{data.content}</p>
