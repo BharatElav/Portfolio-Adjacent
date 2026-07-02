@@ -20,12 +20,18 @@ export type CVExperience = {
   roles: CVRole[]
 }
 
+export type CVCourse = {
+  name: string
+  description: string
+}
+
 export type CVProgram = {
   degree: string
   start: string
   end: string
   gpa: string
   description: string
+  courses: CVCourse[]
 }
 
 export type CVEducation = {
@@ -122,8 +128,12 @@ export function parseCV(): CV {
         if (key && rest.length) instMeta[key.trim()] = rest.join(':').trim()
       })
 
-      const programs: CVProgram[] = programBlocks.map((block: string) => {
-        const lines = block.split('\n')
+      const programs: CVProgram[] = programBlocks.map((programBlock: string) => {
+        // Split this program block further into: header fields+description, then course: sub-blocks
+        const courseBlocks = programBlock.split(/(?=^course:)/m).filter(Boolean)
+        const programHeader = courseBlocks[0].trim().startsWith('course:') ? '' : courseBlocks.shift()!
+
+        const lines = programHeader.split('\n')
         const meta: Record<string, string> = {}
         let contentStart = 0
 
@@ -139,12 +149,25 @@ export function parseCV(): CV {
 
         const description = lines.slice(contentStart).join('\n').trim()
 
+        const courses: CVCourse[] = courseBlocks.map((cBlock: string) => {
+          const cLines = cBlock.split('\n')
+          const firstLine = cLines[0].trim()
+          const name = firstLine.replace(/^course:\s*/, '').trim()
+          const courseDescription = cLines.slice(1).join('\n').trim()
+
+          return {
+            name,
+            description: courseDescription,
+          }
+        })
+
         return {
           degree: meta.degree,
           start: meta.start,
           end: meta.end,
           gpa: meta.gpa,
           description,
+          courses,
         }
       })
 

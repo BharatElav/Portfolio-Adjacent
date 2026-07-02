@@ -127,6 +127,20 @@ export default function CVSection({ data }: { data: CV }) {
                                                         {prog.description}
                                                     </p>
                                                 )}
+                                                {prog.courses && prog.courses.length > 0 && (
+                                                    <div className="mt-4 flex flex-col gap-4">
+                                                        {prog.courses.map((course, k) => (
+                                                            <div key={k}>
+                                                                <p className="text-sm font-medium text-black dark:text-white">{course.name}</p>
+                                                                {course.description && (
+                                                                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
+                                                                        {course.description}
+                                                                    </p>
+                                                                )}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
                                             </div>
                                         ))}
                                     </div>
