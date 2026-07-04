@@ -68,9 +68,12 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
     const [stacked, setStacked] = useState(false)
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
     const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({})
-    const containerRef = useRef<HTMLDivElement | null>(null)
     const tabBarRef = useRef<HTMLDivElement | null>(null)
     const wrapRef = useRef<HTMLDivElement | null>(null)
+
+    // The vertical offset (px) from the viewport top where content "starts",
+    // accounting for the fixed navbar (~80px) plus the sticky tab bar in stacked mode.
+    const scrollOffset = () => (stacked ? 140 : 100)
 
     useLayoutEffect(() => {
         const SIDEBAR_WIDTH = 144 // w-36
@@ -88,18 +91,18 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
     }, [])
 
     useEffect(() => {
-        const container = containerRef.current
-        if (!container) return
+        const main = document.querySelector('main')
+        if (!main) return
 
         const handleScroll = () => {
-            const containerTop = container.getBoundingClientRect().top
+            const offset = scrollOffset()
             let closest = sections[0]
             let closestDistance = Infinity
 
             sections.forEach((s) => {
                 const el = sectionRefs.current[s]
                 if (!el) return
-                const distance = Math.abs(el.getBoundingClientRect().top - containerTop - 20)
+                const distance = Math.abs(el.getBoundingClientRect().top - offset)
                 if (distance < closestDistance) {
                     closestDistance = distance
                     closest = s
@@ -109,11 +112,12 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
             setActive(closest)
         }
 
-        container.addEventListener('scroll', handleScroll)
+        main.addEventListener('scroll', handleScroll)
         handleScroll()
 
-        return () => container.removeEventListener('scroll', handleScroll)
-    }, [])
+        return () => main.removeEventListener('scroll', handleScroll)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [stacked])
 
     useEffect(() => {
         const bar = tabBarRef.current
@@ -124,13 +128,23 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
     }, [active])
 
     const scrollTo = (id: string) => {
-        sectionRefs.current[id]?.scrollIntoView({ behavior: 'smooth' })
+        const main = document.querySelector('main')
+        const el = sectionRefs.current[id]
+        if (!main || !el) return
+        const target = main.scrollTop + el.getBoundingClientRect().top - scrollOffset() + 10
+        main.scrollTo({ top: target, behavior: 'smooth' })
     }
 
     return (
-        <section className={`h-screen snap-start snap-always flex overflow-hidden pt-20 justify-center bg-[var(--background)] ${stacked ? 'flex-col' : 'flex-row'}`}>
-            <div ref={wrapRef} className={`flex w-full max-w-5xl h-full ${stacked ? 'flex-col' : 'flex-row'}`}>
-                <div ref={tabBarRef} className={`sticky top-0 z-10 bg-[var(--background)] shrink-0 px-4 gap-4 overscroll-contain [&::-webkit-scrollbar]:hidden flex ${stacked ? 'w-full flex-row py-4 overflow-x-auto overflow-y-hidden' : 'w-36 flex-col py-12 overflow-y-auto overflow-x-hidden'}`}>
+        <section className={`snap-start flex justify-center bg-[var(--background)] pt-20 min-h-screen ${stacked ? 'flex-col items-center' : 'flex-row'}`}>
+            <div ref={wrapRef} className={`flex w-full max-w-5xl ${stacked ? 'flex-col' : 'flex-row'}`}>
+                <div
+                    ref={tabBarRef}
+                    className={`sticky z-10 bg-[var(--background)] shrink-0 px-4 gap-4 [&::-webkit-scrollbar]:hidden flex ${stacked
+                        ? 'top-20 w-full flex-row py-4 overflow-x-auto overflow-y-hidden'
+                        : 'top-24 self-start w-36 flex-col py-12'
+                        }`}
+                >
                     {sections.map((s) => (
                         <button
                             key={s}
@@ -146,7 +160,7 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
                     ))}
                 </div>
 
-                <div ref={containerRef} className={`flex-1 overflow-y-auto overflow-x-hidden flex flex-col gap-6 [&::-webkit-scrollbar]:hidden ${stacked ? 'px-4 py-8' : 'px-10 py-12'}`}>
+                <div className={`flex-1 flex flex-col gap-6 ${stacked ? 'px-4 py-8' : 'px-10 py-12'}`}>
                     <div id="Contact" ref={(el) => { sectionRefs.current['Contact'] = el }} className="rounded-xl p-4 md:p-8">
                         <h2 className="text-xl md:text-2xl font-bold mb-4 text-black dark:text-white">Contact Information</h2>
                         <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-3 text-sm md:text-base">
