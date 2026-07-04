@@ -107,10 +107,6 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
             })
 
             setActive(closest)
-
-            // Only let scroll chain up to the page (to go back to the previous
-            // section) when already at the very top of the CV content — never downward.
-            container.style.overscrollBehaviorY = container.scrollTop <= 0 ? 'auto' : 'contain'
         }
 
         container.addEventListener('scroll', handleScroll)
@@ -134,7 +130,7 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
     return (
         <section className={`h-screen snap-start snap-always flex overflow-hidden pt-20 justify-center bg-[var(--background)] ${stacked ? 'flex-col' : 'flex-row'}`}>
             <div ref={wrapRef} className={`flex w-full max-w-5xl h-full ${stacked ? 'flex-col' : 'flex-row'}`}>
-                <div ref={tabBarRef} className={`shrink-0 px-4 gap-4 overscroll-contain [&::-webkit-scrollbar]:hidden flex ${stacked ? 'w-full flex-row py-4 overflow-x-auto overflow-y-hidden' : 'w-36 flex-col py-12 overflow-y-auto overflow-x-hidden'}`}>
+                <div ref={tabBarRef} className={`sticky top-0 z-10 bg-[var(--background)] shrink-0 px-4 gap-4 overscroll-contain [&::-webkit-scrollbar]:hidden flex ${stacked ? 'w-full flex-row py-4 overflow-x-auto overflow-y-hidden' : 'w-36 flex-col py-12 overflow-y-auto overflow-x-hidden'}`}>
                     {sections.map((s) => (
                         <button
                             key={s}
