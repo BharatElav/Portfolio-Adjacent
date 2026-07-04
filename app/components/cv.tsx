@@ -66,14 +66,40 @@ function CourseCategoryBlock({
 export default function CVSection({ data, courses }: { data: CV; courses: Course[] }) {
     const [active, setActive] = useState('Contact')
     const [stacked, setStacked] = useState(false)
+    const [navHeight, setNavHeight] = useState(80)
+    const [tabBarHeight, setTabBarHeight] = useState(0)
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
     const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({})
     const tabBarRef = useRef<HTMLDivElement | null>(null)
     const wrapRef = useRef<HTMLDivElement | null>(null)
 
-    // The vertical offset (px) from the viewport top where content "starts",
-    // accounting for the fixed navbar (~80px) plus the sticky tab bar in stacked mode.
-    const scrollOffset = () => (stacked ? 140 : 100)
+    // Real pixel offset from viewport top to where CV content begins:
+    // navbar height, plus the tab bar's own height when it's stacked above content.
+    const scrollOffset = () => navHeight + (stacked ? tabBarHeight : 0)
+
+    useLayoutEffect(() => {
+        const measureNav = () => {
+            const nav = document.querySelector('nav')
+            if (nav) setNavHeight(nav.getBoundingClientRect().height)
+        }
+        measureNav()
+        const nav = document.querySelector('nav')
+        const ro = nav ? new ResizeObserver(measureNav) : null
+        if (nav && ro) ro.observe(nav)
+        return () => ro?.disconnect()
+    }, [])
+
+    useLayoutEffect(() => {
+        const measureTabBar = () => {
+            const bar = tabBarRef.current
+            if (bar) setTabBarHeight(bar.getBoundingClientRect().height)
+        }
+        measureTabBar()
+        const bar = tabBarRef.current
+        const ro = bar ? new ResizeObserver(measureTabBar) : null
+        if (bar && ro) ro.observe(bar)
+        return () => ro?.disconnect()
+    }, [stacked])
 
     useLayoutEffect(() => {
         const SIDEBAR_WIDTH = 144 // w-36
@@ -117,7 +143,7 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
 
         return () => main.removeEventListener('scroll', handleScroll)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [stacked])
+    }, [stacked, navHeight, tabBarHeight])
 
     useEffect(() => {
         const bar = tabBarRef.current
@@ -136,13 +162,14 @@ export default function CVSection({ data, courses }: { data: CV; courses: Course
     }
 
     return (
-        <section className={`snap-start flex justify-center bg-[var(--background)] pt-20 min-h-screen ${stacked ? 'flex-col items-center' : 'flex-row'}`}>
+        <section className={`snap-start flex justify-center bg-[var(--background)] min-h-screen ${stacked ? 'flex-col items-center' : 'flex-row'}`} style={{ paddingTop: navHeight }}>
             <div ref={wrapRef} className={`flex w-full max-w-5xl ${stacked ? 'flex-col' : 'flex-row'}`}>
                 <div
                     ref={tabBarRef}
+                    style={{ top: navHeight }}
                     className={`sticky z-10 bg-[var(--background)] shrink-0 px-4 gap-4 [&::-webkit-scrollbar]:hidden flex ${stacked
-                        ? 'top-20 w-full flex-row py-4 overflow-x-auto overflow-y-hidden'
-                        : 'top-24 self-start w-36 flex-col py-12'
+                        ? 'w-full flex-row py-4 overflow-x-auto overflow-y-hidden'
+                        : 'self-start w-36 flex-col py-12'
                         }`}
                 >
                     {sections.map((s) => (
