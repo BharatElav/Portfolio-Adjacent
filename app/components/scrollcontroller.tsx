@@ -40,12 +40,16 @@ export default function ScrollController() {
             return cv.getBoundingClientRect().top <= 1
         }
 
-        // True when we're inside the CV but its top edge is exactly at the viewport top
+        // True only when the Contact card (the CV's first content) has fully
+        // arrived at the viewport top — meaning there's nothing left to scroll
+        // up to within the CV, so an upward flick genuinely means "exit the CV"
         const atCVTop = () => {
             const cv = getCVSection()
             if (!cv) return false
-            const top = cv.getBoundingClientRect().top
-            return top >= -1 && top <= 1
+            const firstCard = cv.querySelector('#Contact') as HTMLElement | null
+            if (!firstCard) return false
+            const top = firstCard.getBoundingClientRect().top
+            return top >= -1 && top <= 100 // tolerance for the sticky tab bar height
         }
 
         const scrollToSection = (index: number) => {
