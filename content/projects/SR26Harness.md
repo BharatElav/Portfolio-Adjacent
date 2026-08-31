@@ -102,8 +102,6 @@ Wire Sizing based on both datasheets and data logs, this allowed us to maximize 
 
 ## Results
 
-Concrete outcomes — numbers, performance metrics, what shipped.
-
 - **Firewall Bulkhead Reduction** allowing us to fully sit the harness within the chassis to be un-noticable to the driver
 - Passed all FSAE electrical tech inspection requirements
 - "Best harness our MIS judge has seen"
