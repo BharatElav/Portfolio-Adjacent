@@ -1,11 +1,11 @@
 ---project---
-title: TestProj1
+title: SR26 Wiring Harness
 tag: Formula SAE
-media: /images/harness.jpg
+media: /images/HarnessCAD1.png
 mediaType: image
-slug: test1
+slug: SR26Harness
 
-Short description of the project...
+An overview of the design and manufacturing for the SR26 wiring harness I lead
 
 ---project---
 title: TestProj2
