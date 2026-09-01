@@ -100,6 +100,16 @@ Wire Sizing based on both datasheets and data logs, this allowed us to maximize 
 
 ![Data Logs](/images/DataLogs.jpg)
 
+## Wire Length Estimation
+
+Wire Lengths were based on a simulation model I built within MATLAB, I modeled concetric harness wiring similarly to a twisted rope using some basic geometry calculations. 
+
+This also allowed us to see the packing of our wiress, redbull racing has a good chart explaining wire packing in concentric twisting but the issue is that it is for wires of the same gauge and in our harness, it is not something we have, so I wanted to model that as well.
+
+ I ended up on the MATLAB Students instagram page where I explained this. https://www.instagram.com/reel/DcGcw-qmYWM/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA== 
+
+![Harness Model](/images/HarnessModel.jpg)
+
 ## Results
 
 - **Firewall Bulkhead Reduction** allowing us to fully sit the harness within the chassis to be un-noticable to the driver
